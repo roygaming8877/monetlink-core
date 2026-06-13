@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MonetLink | The Highest Paying URL Shortener{% endblock %}</title>
+    <meta name="description" content="Shorten URLs and earn money. Up to $220 per 10000 views.">
+    
+    <!-- Enterprise Tailwind & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        monet: {
+                            dark: '#0f0826', purple: '#1e0b4a', accent: '#facc15', card: '#160d38'
+                        }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-monet-dark text-slate-100 min-h-screen flex flex-col font-sans selection:bg-monet-accent selection:text-black">
+
+    {% include "layouts/header.html" %}
+
+    <!-- Flash Messages Block -->
+    <div class="max-w-7xl mx-auto px-4 w-full mt-4">
+        {% block flash_messages %}{% endblock %}
+    </div>
+
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "layouts/footer.html" %}
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

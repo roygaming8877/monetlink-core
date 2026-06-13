@@ -1,0 +1,25 @@
+{# Dynamic Notification Component: Use with Jinja 'include' #}
+{% macro render_alert(type='info', message='', dismissible=true) %}
+    {% set colors = {
+        'success': 'bg-green-900/30 border-green-500/50 text-green-400 icon-check-circle',
+        'error': 'bg-red-900/30 border-red-500/50 text-red-400 icon-triangle-exclamation',
+        'warning': 'bg-yellow-900/30 border-yellow-500/50 text-yellow-400 icon-circle-exclamation',
+        'info': 'bg-blue-900/30 border-blue-500/50 text-blue-400 icon-circle-info'
+    } %}
+    
+    {% set style = colors[type] if type in colors else colors['info'] %}
+    
+    <div class="flex items-start gap-3 p-4 border rounded-lg shadow-md {{ style }} mb-4 animate-fade-in relative" role="alert">
+        <div class="flex-shrink-0 mt-0.5">
+            <i class="fa-solid {{ style.split('icon-')[1] }} text-lg"></i>
+        </div>
+        <div class="flex-1 text-sm font-medium leading-relaxed">
+            {{ message | safe }}
+        </div>
+        {% if dismissible %}
+        <button onclick="this.parentElement.remove()" class="flex-shrink-0 ml-4 opacity-70 hover:opacity-100 transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        {% endif %}
+    </div>
+{% endmacro %}

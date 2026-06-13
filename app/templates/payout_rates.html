@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Publisher Payout Rates | MonetLink{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-black text-white mb-4">Publisher Payout Rates</h1>
+        <p class="text-slate-400">Earnings are calculated per 10,000 views. We count multiple views from the same IP according to our fraud limits.</p>
+    </div>
+
+    <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-monet-purple text-monet-accent border-b border-purple-800">
+                        <th class="p-5 font-bold tracking-wider">COUNTRY</th>
+                        <th class="p-5 font-bold tracking-wider text-center">DESKTOP / TABLET</th>
+                        <th class="p-5 font-bold tracking-wider text-center">MOBILE</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-300 divide-y divide-purple-900/40">
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-5 flex items-center gap-3"><span class="text-xl">🇺🇸</span> United States</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$120.00</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$120.00</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-5 flex items-center gap-3"><span class="text-xl">🇨🇦</span> Canada</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$100.00</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$100.00</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-5 flex items-center gap-3"><span class="text-xl">🇬🇧</span> United Kingdom</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$90.00</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$90.00</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-5 flex items-center gap-3"><span class="text-xl">🇮🇳</span> India</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$45.00</td>
+                        <td class="p-5 text-center font-mono text-green-400 font-bold">$45.00</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors bg-black/20">
+                        <td class="p-5 flex items-center gap-3 font-bold"><i class="fa-solid fa-globe text-monet-accent"></i> Worldwide Deal (All Other Countries)</td>
+                        <td class="p-5 text-center font-mono text-slate-400 font-bold">$32.50</td>
+                        <td class="p-5 text-center font-mono text-slate-400 font-bold">$32.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

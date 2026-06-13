@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Manage Links | MonetLink{% endblock %}
+
+{% block content %}
+<div class="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    {% include "layouts/sidebar_member.html" %}
+
+    <div class="flex-1 w-full overflow-hidden space-y-6">
+        <div class="bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-black text-white">Manage Links</h1>
+                <p class="text-slate-400 text-sm mt-1">Track views and manage all your shortened active URLs.</p>
+            </div>
+            
+            <form method="GET" class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <div class="relative w-full sm:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500"></i>
+                    <input type="text" name="q" placeholder="Search alias or original URL..." class="w-full bg-monet-dark border border-purple-800 text-white text-sm rounded-lg pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-monet-accent">
+                </div>
+                <button type="submit" class="bg-monet-accent text-monet-dark font-bold px-6 py-2.5 rounded-lg hover:bg-yellow-400 transition shadow-md">
+                    Search
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-monet-purple text-monet-accent uppercase tracking-wider text-xs border-b border-purple-800">
+                            <th class="p-5">Link Details</th>
+                            <th class="p-5 text-center">Created</th>
+                            <th class="p-5 text-center">Total Views</th>
+                            <th class="p-5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-purple-900/40" id="links-table-body">
+                        <tr class="hover:bg-white/5 transition-colors group">
+                            <td class="p-5">
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <a href="https://monetlink.online/alias-test-1" target="_blank" class="font-bold text-blue-400 hover:text-blue-300 text-base" id="short-url-1">
+                                            https://monetlink.online/alias-test-1
+                                        </a>
+                                        <button onclick="copyToClipboard('short-url-1')" class="text-slate-500 hover:text-white transition p-1" title="Copy Link">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-500 truncate max-w-sm" title="https://drive.google.com/file/d/long-original-url">
+                                        <i class="fa-solid fa-arrow-turn-down text-[10px] transform rotate-90"></i>
+                                        https://drive.google.com/file/d/long-original-url...
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-5 text-center text-slate-400 whitespace-nowrap">
+                                14 Jun 2026<br><span class="text-[10px]">14:30 IST</span>
+                            </td>
+                            <td class="p-5 text-center">
+                                <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full font-bold">1,245</span>
+                            </td>
+                            <td class="p-5 text-right space-x-2">
+                                <a href="/member/links/stats/1" class="inline-block p-2 text-slate-400 hover:text-white bg-slate-800 rounded transition" title="View Advanced Stats">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                </a>
+                                <button onclick="openHideModal('link_id_here')" class="inline-block p-2 text-slate-400 hover:text-orange-400 bg-slate-800 rounded transition" title="Hide Link">
+                                    <i class="fa-solid fa-eye-slash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+            
+            <div class="bg-monet-purple/30 p-4 border-t border-purple-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <span class="text-sm text-slate-400">Showing <span class="font-bold text-white">1</span> to <span class="font-bold text-white">10</span> of <span class="font-bold text-white">45</span> entries</span>
+                <nav class="flex gap-1">
+                    <button class="px-3 py-1.5 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition text-sm disabled:opacity-50">Prev</button>
+                    <button class="px-3 py-1.5 bg-monet-accent text-monet-dark font-bold rounded text-sm">1</button>
+                    <button class="px-3 py-1.5 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition text-sm">2</button>
+                    <button class="px-3 py-1.5 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition text-sm">3</button>
+                    <button class="px-3 py-1.5 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition text-sm">Next</button>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Link copied to clipboard!");
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
+    function openHideModal(linkId) {
+        if(confirm("Are you sure you want to hide this link? It will be moved to the Hidden Links folder and won't be deleted.")) {
+            // Proceed to API call
+            console.log("Hiding link:", linkId);
+        }
+    }
+</script>
+{% endblock %}

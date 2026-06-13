@@ -1,0 +1,16 @@
+/* Dashboard Graph Containers */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+.tooltip-custom {
+    background: rgba(15, 8, 38, 0.95);
+    border: 1px solid #4c1d95;
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}

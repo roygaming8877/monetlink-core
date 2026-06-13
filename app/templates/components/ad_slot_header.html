@@ -1,0 +1,22 @@
+{# Reusable 728x90 Top Banner Ad Slot Component #}
+<div class="w-full flex justify-center my-6">
+    <div class="relative w-full max-w-[728px] h-[90px] bg-slate-900 border border-slate-700/50 rounded flex items-center justify-center overflow-hidden group shadow-lg">
+        <!-- AdBlock Detection Fallback -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-600 font-mono text-xs z-0">
+            <i class="fa-solid fa-rectangle-ad text-2xl mb-1 opacity-50"></i>
+            <span>Advertisement Space</span>
+        </div>
+        
+        <!-- Actual Ad Injection Zone -->
+        <div class="relative z-10 w-full h-full ad-container">
+            {{ system_ads.header_banner | safe if system_ads else '' }}
+        </div>
+
+        <!-- Admin Hover Info (Visible only to admins) -->
+        {% if current_user and current_user.is_superuser %}
+        <div class="absolute top-0 right-0 bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-bl opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none">
+            728x90 Header Slot
+        </div>
+        {% endif %}
+    </div>
+</div>

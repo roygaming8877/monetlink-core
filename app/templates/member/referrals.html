@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Referral Network | MonetLink{% endblock %}
+
+{% block content %}
+<div class="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    {% include "layouts/sidebar_member.html" %}
+
+    <div class="flex-1 w-full overflow-hidden space-y-6">
+        
+        <div class="bg-gradient-to-r from-pink-900/60 to-purple-900/60 p-8 rounded-2xl border border-pink-500/30 shadow-xl text-center relative overflow-hidden">
+            <i class="fa-solid fa-users absolute -left-10 -bottom-10 text-9xl text-pink-500/10 rotate-12"></i>
+            <h1 class="text-3xl font-black text-white relative z-10">20% Lifetime Commission</h1>
+            <p class="text-pink-200 text-base mt-2 max-w-2xl mx-auto relative z-10">The MonetLink referral program is a great way to spread the word and earn even more money! Refer friends and receive 20% of their earnings for life!</p>
+        </div>
+
+        <div class="bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg">
+            <h3 class="text-lg font-bold text-white mb-4">Your Unique Referral Link</h3>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <input type="text" id="ref-link" readonly value="https://monetlink.online/ref/pub123456" class="w-full bg-monet-dark border border-purple-800 text-pink-400 font-mono font-bold text-lg rounded-lg px-4 py-3 focus:outline-none">
+                <button onclick="copyRefLink()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-8 py-3 rounded-lg shadow-lg transition-colors whitespace-nowrap">
+                    <i class="fa-regular fa-copy mr-2"></i> Copy Link
+                </button>
+            </div>
+            
+            <div class="mt-6 flex flex-wrap gap-4 justify-center sm:justify-start">
+                <button class="bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white px-4 py-2 rounded text-sm font-bold transition flex items-center gap-2"><i class="fa-brands fa-twitter"></i> Tweet</button>
+                <button class="bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2 rounded text-sm font-bold transition flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Share</button>
+                <button class="bg-[#0088cc] hover:bg-[#007ab8] text-white px-4 py-2 rounded text-sm font-bold transition flex items-center gap-2"><i class="fa-brands fa-telegram"></i> Send</button>
+            </div>
+        </div>
+
+        <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-lg overflow-hidden">
+            <div class="bg-monet-purple/50 px-6 py-4 border-b border-purple-800">
+                <h2 class="text-lg font-bold text-white">Your Referred Publishers (3)</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="text-slate-400 uppercase tracking-wider text-[10px] border-b border-purple-800/50">
+                            <th class="p-4">Username</th>
+                            <th class="p-4 text-center">Date Joined</th>
+                            <th class="p-4 text-right">Commission Earned (20%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-purple-900/30">
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-mono">alex_trader***</td>
+                            <td class="p-4 text-center text-slate-500">10 Jun 2026</td>
+                            <td class="p-4 text-right font-bold text-pink-400">$ 4.20</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-mono">gaming_hub***</td>
+                            <td class="p-4 text-center text-slate-500">12 Jun 2026</td>
+                            <td class="p-4 text-right font-bold text-pink-400">$ 8.00</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-mono">crypto_news***</td>
+                            <td class="p-4 text-center text-slate-500">14 Jun 2026</td>
+                            <td class="p-4 text-right font-bold text-pink-400">$ 0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg">
+            <h3 class="text-lg font-bold text-white mb-4">Website Promo Banners</h3>
+            <p class="text-sm text-slate-400 mb-4">Copy this code and paste it inside your website's HTML to display our high-converting referral banner.</p>
+            <div class="relative">
+                <textarea readonly rows="3" class="w-full bg-black border border-purple-800 text-green-400 font-mono text-xs rounded-lg p-4 focus:outline-none resize-none">&lt;a href="https://monetlink.online/ref/pub123456" target="_blank"&gt;&lt;img src="https://monetlink.online/static/banners/728x90.gif" alt="Earn Money with MonetLink" /&gt;&lt;/a&gt;</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyRefLink() {
+        const text = document.getElementById('ref-link').value;
+        navigator.clipboard.writeText(text).then(() => alert("Referral Link Copied!"));
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Report Abuse & DMCA | MonetLink{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-16">
+    <div class="text-center mb-10">
+        <div class="w-20 h-20 bg-red-900/30 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/30">
+            <i class="fa-solid fa-shield-halved text-4xl"></i>
+        </div>
+        <h1 class="text-4xl font-black text-white">Report Abuse & DMCA</h1>
+        <p class="text-slate-400 mt-4">We take copyright infringement, malware, and illegal content seriously. Our team reviews all reports within 24 hours.</p>
+    </div>
+
+    <div class="bg-monet-card rounded-2xl border border-red-900/30 shadow-2xl p-8">
+        <form action="/api/v1/report" method="POST" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">MonetLink URL <span class="text-red-500">*</span></label>
+                <input type="url" required placeholder="https://monetlink.online/..." class="w-full bg-black border border-slate-700 text-white rounded-lg px-4 py-3 focus:border-red-500 focus:outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Reason for Reporting <span class="text-red-500">*</span></label>
+                <select required class="w-full bg-black border border-slate-700 text-white rounded-lg px-4 py-3 focus:border-red-500 focus:outline-none">
+                    <option value="" disabled selected>Select an option...</option>
+                    <option value="dmca">DMCA / Copyright Infringement</option>
+                    <option value="malware">Malware / Phishing / Virus</option>
+                    <option value="adult">Child Exploitation / Illegal Adult Content</option>
+                    <option value="spam">Spam / Scam / Fraud</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Your Email Address <span class="text-red-500">*</span></label>
+                <input type="email" required placeholder="For correspondence..." class="w-full bg-black border border-slate-700 text-white rounded-lg px-4 py-3 focus:border-red-500 focus:outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Additional Details & Proof</label>
+                <textarea rows="5" required placeholder="Please provide specific details, timestamps, or original source links..." class="w-full bg-black border border-slate-700 text-white rounded-lg px-4 py-3 focus:border-red-500 focus:outline-none"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-lg shadow-lg transition-colors flex justify-center items-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Submit Report
+            </button>
+            <p class="text-xs text-center text-slate-500 mt-4">False DMCA claims may be subject to legal consequences under Section 512(f) of the DMCA.</p>
+        </form>
+    </div>
+</div>
+{% endblock %}

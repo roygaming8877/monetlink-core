@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Settings Profile | MonetLink{% endblock %}
+
+{% block content %}
+<div class="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    {% include "layouts/sidebar_member.html" %}
+
+    <div class="flex-1 w-full overflow-hidden space-y-8">
+        
+        <div class="bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg">
+            <h1 class="text-2xl font-black text-white">Billing Profile</h1>
+            <p class="text-slate-400 text-sm mt-1">Complete your profile to receive successful payouts.</p>
+        </div>
+
+        <form method="POST" action="/api/v1/user/profile" class="space-y-8">
+            <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-lg overflow-hidden">
+                <div class="bg-monet-purple/50 px-6 py-4 border-b border-purple-800">
+                    <h2 class="text-lg font-bold text-white"><i class="fa-solid fa-address-card mr-2 text-monet-accent"></i> Billing Address</h2>
+                </div>
+                <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+                        <input type="text" value="John" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+                        <input type="text" value="Doe" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Address Line 1</label>
+                        <input type="text" value="123 Main Street" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">City</label>
+                        <input type="text" value="New York" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Country Selection</label>
+                        <select class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none appearance-none">
+                            <option value="US" selected>United States (US)</option>
+                            <option value="IN">India (IN)</option>
+                            <option value="GB">United Kingdom (GB)</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+                        <input type="text" value="+1 555 0192" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-lg overflow-hidden">
+                <div class="bg-monet-purple/50 px-6 py-4 border-b border-purple-800 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-white"><i class="fa-solid fa-building-columns mr-2 text-monet-accent"></i> Payment Preferences</h2>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Withdrawal Method</label>
+                        <select id="withdraw-method" class="w-full bg-monet-dark border border-purple-800 text-white rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-monet-accent focus:outline-none">
+                            <option value="PayPal">PayPal ($5.00 Min)</option>
+                            <option value="USDT">USDT TRC20 ($10.00 Min)</option>
+                            <option value="UPI" selected>UPI - India ($5.00 Min)</option>
+                            <option value="BankTransfer">Bank Transfer ($50.00 Min)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Withdrawal Email / Account ID</label>
+                        <textarea rows="3" placeholder="Enter your Wallet Address, UPI ID, or PayPal Email here..." class="w-full bg-monet-dark border border-purple-800 text-white font-mono text-sm rounded-lg px-4 py-3 focus:ring-2 focus:ring-monet-accent focus:outline-none resize-none">user@okaxis</textarea>
+                        <p class="text-xs text-slate-500 mt-2 text-justify">
+                            For PayPal: Enter your email.<br>
+                            For USDT TRC20: Enter your crypto address (starts with T).<br>
+                            For UPI: Enter your complete VPA.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-black/30 p-6 border-t border-purple-900/40">
+                    <button type="submit" class="w-full md:w-auto bg-monet-accent text-monet-dark font-bold px-8 py-3 rounded-lg shadow-[0_0_15px_rgba(250,204,21,0.4)] hover:bg-yellow-300 transition">
+                        Save Profile Settings
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+                  

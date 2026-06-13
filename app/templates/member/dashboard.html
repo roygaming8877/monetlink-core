@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | MonetLink{% endblock %}
+
+{% block content %}
+<div class="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    {% include "layouts/sidebar_member.html" %}
+
+    <div class="flex-1 w-full overflow-hidden space-y-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg">
+            <div>
+                <h1 class="text-2xl font-black text-white tracking-wide">Publisher Dashboard</h1>
+                <p class="text-slate-400 text-sm mt-1">Welcome back! Here's your traffic and revenue overview.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <select class="appearance-none bg-monet-dark border border-purple-800 text-white text-sm rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-monet-accent shadow-sm">
+                        <option>Today</option>
+                        <option>Yesterday</option>
+                        <option>This Month</option>
+                        <option selected>All Time</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-xs text-slate-400 pointer-events-none"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-monet-card p-6 rounded-2xl border border-blue-900/40 shadow-lg hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Total Views</p>
+                        <h3 class="text-3xl font-black text-white">12,450</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs font-semibold text-green-400 flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +14.5% from last month
+                </div>
+            </div>
+            <div class="bg-monet-card p-6 rounded-2xl border border-green-900/40 shadow-lg hover:-translate-y-1 transition-transform relative overflow-hidden">
+                <div class="absolute -right-6 -top-6 text-green-500/10"><i class="fa-solid fa-sack-dollar text-8xl"></i></div>
+                <div class="flex justify-between items-start relative z-10">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Total Earnings</p>
+                        <h3 class="text-3xl font-black text-white">$ 45.80</h3>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs font-semibold text-green-400 flex items-center gap-1 relative z-10">
+                    <i class="fa-solid fa-arrow-trend-up"></i> Wallet updated instantly
+                </div>
+            </div>
+            <div class="bg-monet-card p-6 rounded-2xl border border-pink-900/40 shadow-lg hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Referral Earnings</p>
+                        <h3 class="text-3xl font-black text-white">$ 12.20</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs font-semibold text-slate-500 flex items-center gap-1">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Lifetime 20% commission
+                </div>
+            </div>
+            <div class="bg-monet-card p-6 rounded-2xl border border-yellow-900/40 shadow-lg hover:-translate-y-1 transition-transform">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">Average CPM</p>
+                        <h3 class="text-3xl font-black text-white">$ 3.67</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-monet-accent">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                </div>
+                <div class="mt-4 text-xs font-semibold text-yellow-400 flex items-center gap-1">
+                    <i class="fa-solid fa-bolt"></i> Based on visitor origin
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-monet-card p-6 rounded-2xl border border-purple-900/50 shadow-lg">
+            <h3 class="text-lg font-bold text-white mb-4">Traffic & Revenue Analytics</h3>
+            <div class="w-full h-80 relative">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        
+        // Gradient for Views line
+        const viewGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        viewGradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)'); // Blue
+        viewGradient.addColorStop(1, 'rgba(59, 130, 246, 0.0)');
+        
+        // Gradient for Earnings line
+        const earnGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        earnGradient.addColorStop(0, 'rgba(16, 185, 129, 0.5)'); // Green
+        earnGradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1 Jun', '2 Jun', '3 Jun', '4 Jun', '5 Jun', '6 Jun', '7 Jun'],
+                datasets: [
+                    {
+                        label: 'Views',
+                        data: [120, 190, 300, 500, 200, 300, 450],
+                        borderColor: '#3b82f6',
+                        backgroundColor: viewGradient,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Earnings ($)',
+                        data: [0.36, 0.57, 0.90, 1.50, 0.60, 0.90, 1.35],
+                        borderColor: '#10b981',
+                        backgroundColor: earnGradient,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { labels: { color: '#cbd5e1', font: { family: 'Inter' } } }
+                },
+                scales: {
+                    x: { grid: { color: '#1e0b4a', drawBorder: false }, ticks: { color: '#94a3b8' } },
+                    y: { type: 'linear', display: true, position: 'left', grid: { color: '#1e0b4a', drawBorder: false }, ticks: { color: '#94a3b8' } },
+                    y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#10b981', callback: function(value) { return '$' + value; } } }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

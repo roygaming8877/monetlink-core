@@ -1,0 +1,85 @@
+# --- Python Native Environment Bytecodes ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual Environments Storage Units ---
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Enterprise Database Storages & Engine Dumps ---
+*.db
+*.sqlite3
+data/
+pg_data/
+redis_data/
+monetlink_production_data/
+monetlink_cache_store/
+
+# --- Secrets, Credentials & Tokens Matrices ---
+.env
+.env.local
+.env.production
+*.pem
+*.key
+*.secret
+credentials.json
+
+# --- Code Quality Testing Suites & Reporting Matrix Logs ---
+.htmlcov/
+.toml/
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# --- Node Package Managers Modules & Asset Logs ---
+node_modules/
+/npm-debug.log*
+/yarn-error.log*
+/yarn-debug.log*
+package-lock.json
+
+# --- OS System Level Structural Disks ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

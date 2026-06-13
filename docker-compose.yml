@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # --- Persistent High-Performance Storage Architecture ---
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: monetlink_postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - monetlink_production_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - monetlink_internal_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- Real-Time Messaging Queue Engine & Data Broker ---
+  redis_broker:
+    image: redis:7-alpine
+    container_name: monetlink_redis_container
+    restart: always
+    command: redis-server --appendonly yes --port 6379
+    volumes:
+      - monetlink_cache_store:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - monetlink_internal_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- Central Enterprise Application Routing Node ---
+  fastapi_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monetlink_api_worker_node
+    restart: always
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SECRET_KEY=${SECRET_KEY}
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      redis_broker:
+        condition: service_healthy
+    networks:
+      - monetlink_internal_network
+
+  # --- High Concurrency Asynchronous Click Processing Pipeline ---
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monetlink_async_celery_worker
+    command: celery -A app.workers.celery_app worker --loglevel=info --concurrency=8
+    env_file:
+      - .env
+    depends_on:
+      - redis_broker
+      - postgres_db
+    networks:
+      - monetlink_internal_network
+    restart: always
+
+  # --- Precision Scheduled Systems Management (Cron Event Orchestration) ---
+  celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monetlink_cron_scheduler_beat
+    command: celery -A app.workers.celery_app beat --loglevel=info
+    env_file:
+      - .env
+    depends_on:
+      - redis_broker
+    networks:
+      - monetlink_internal_network
+    restart: always
+
+  # --- Distributed Tasks Execution Visual Dashboard ---
+  flower_monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monetlink_worker_visual_dashboard
+    command: celery -A app.workers.celery_app flower --port=5555
+    ports:
+      - "5555:5555"
+    env_file:
+      - .env
+    depends_on:
+      - redis_broker
+    networks:
+      - monetlink_internal_network
+    restart: always
+
+volumes:
+  monetlink_production_data:
+    driver: local
+  monetlink_cache_store:
+    driver: local
+
+networks:
+  monetlink_internal_network:
+    driver: bridge
+    

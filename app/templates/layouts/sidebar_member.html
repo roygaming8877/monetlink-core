@@ -1,0 +1,67 @@
+<aside class="w-64 bg-monet-card min-h-[calc(100vh-5rem)] border-r border-purple-900/50 hidden lg:flex flex-col flex-shrink-0">
+    <div class="p-4">
+        <a href="/member/dashboard?new=true" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-between transition border border-slate-700">
+            <span class="flex items-center gap-3"><i class="fa-solid fa-paper-plane text-monet-accent"></i> New Shorten Link</span>
+        </a>
+    </div>
+
+    <nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar pb-4 text-sm font-medium text-slate-300">
+        
+        <a href="/member/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/5 text-white">
+            <i class="fa-solid fa-chart-line w-5 text-center text-blue-400"></i> Statistics
+        </a>
+
+        <div class="space-y-1">
+            <button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+                <span class="flex items-center gap-3"><i class="fa-solid fa-link w-5 text-center text-green-400"></i> Manage Links</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div class="pl-11 space-y-1">
+                <a href="/member/links" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">All Links</a>
+                <a href="/member/links/hidden" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Hidden Links</a>
+            </div>
+        </div>
+
+        <a href="/member/withdraw" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+            <i class="fa-solid fa-money-bill-transfer w-5 text-center text-monet-accent"></i> Withdraw
+        </a>
+
+        <div class="space-y-1">
+            <button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+                <span class="flex items-center gap-3"><i class="fa-solid fa-wrench w-5 text-center text-orange-400"></i> Tools</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div class="pl-11 space-y-1">
+                <a href="/member/tools/quick" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Quick Link</a>
+                <a href="/member/tools/mass" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Mass Shrinker</a>
+                <a href="/member/tools/script" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Full Page Script</a>
+                <a href="/member/tools/api" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Developers API</a>
+                <a href="/member/tools/bookmarklet" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Bookmarklet</a>
+            </div>
+        </div>
+
+        <a href="/member/referrals" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+            <i class="fa-solid fa-users w-5 text-center text-pink-400"></i> Referrals
+        </a>
+
+        <a href="/member/invoices" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+            <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-indigo-400"></i> Invoices
+        </a>
+
+        <div class="space-y-1">
+            <button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+                <span class="flex items-center gap-3"><i class="fa-solid fa-gear w-5 text-center text-slate-400"></i> Settings</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div class="pl-11 space-y-1">
+                <a href="/member/profile" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Profile</a>
+                <a href="/member/settings/password" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Change Password</a>
+                <a href="/member/settings/email" class="block px-3 py-2 rounded-lg hover:bg-white/5 transition">Change Email</a>
+            </div>
+        </div>
+
+        <a href="/member/support" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition">
+            <i class="fa-solid fa-life-ring w-5 text-center text-teal-400"></i> Support
+        </a>
+    </nav>
+</aside>

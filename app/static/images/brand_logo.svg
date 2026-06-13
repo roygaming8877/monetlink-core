@@ -1,0 +1,6 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 30L30 10L50 30L30 50L10 30Z" fill="#FACC15"/>
+    <text x="65" y="40" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="white">
+        Monet<tspan fill="#FACC15">Link</tspan>
+    </text>
+</svg>

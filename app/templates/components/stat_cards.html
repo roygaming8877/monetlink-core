@@ -1,0 +1,25 @@
+{# Reusable Dashboard Stat Card #}
+{% macro render_stat_card(title, value, icon, color_theme, trend_value='', trend_label='') %}
+    <div class="bg-monet-card p-6 rounded-2xl border border-{{ color_theme }}-900/40 shadow-lg relative overflow-hidden group hover:border-{{ color_theme }}-500/50 transition-colors">
+        <div class="absolute -right-6 -top-6 text-{{ color_theme }}-500/5 opacity-50 group-hover:scale-110 transition-transform duration-500">
+            <i class="fa-solid {{ icon }} text-8xl"></i>
+        </div>
+        <div class="flex justify-between items-start relative z-10">
+            <div>
+                <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-1">{{ title }}</p>
+                <h3 class="text-3xl font-black text-white tracking-tight">{{ value }}</h3>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-{{ color_theme }}-500/10 flex items-center justify-center text-{{ color_theme }}-400 shadow-inner">
+                <i class="fa-solid {{ icon }} text-xl"></i>
+            </div>
+        </div>
+        {% if trend_value %}
+        <div class="mt-4 text-xs font-semibold flex items-center gap-2 relative z-10 border-t border-slate-800/50 pt-3">
+            <span class="{% if '+' in trend_value %}text-green-400{% else %}text-red-400{% endif %} px-2 py-0.5 rounded bg-black/30">
+                {{ trend_value }}
+            </span>
+            <span class="text-slate-500">{{ trend_label }}</span>
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}

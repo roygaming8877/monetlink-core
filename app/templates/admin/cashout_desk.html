@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% block title %}Cashout Desk | Overlord Admin{% endblock %}
+
+{% block content %}
+<div class="flex max-w-[1600px] mx-auto px-2 sm:px-4 py-4 gap-4 relative">
+    {% include "layouts/sidebar_admin.html" %}
+
+    <div class="flex-1 w-full overflow-hidden space-y-6">
+        
+        <div class="bg-monet-card p-6 rounded-xl border border-red-900/50 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-black text-white flex items-center gap-3">
+                    <i class="fa-solid fa-money-bill-transfer text-blue-400"></i> Cashout Desk Control
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Audit, approve, and provide transaction receipts for pending withdrawals.</p>
+            </div>
+            <div class="flex gap-4">
+                <div class="text-right border-r border-slate-700 pr-4">
+                    <span class="text-2xl font-black text-orange-400">$ 450.00</span>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">12 Pending</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-black text-green-400">$ 14,800.50</span>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Paid (All Time)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#0a0514] rounded-xl border border-slate-800 shadow-xl overflow-visible min-h-[500px]">
+            <!-- Desk Tabs -->
+            <div class="bg-black/50 px-6 py-4 border-b border-slate-800 flex flex-wrap justify-between items-center gap-4">
+                <div class="flex gap-2">
+                    <button class="bg-orange-600 text-white font-bold text-xs px-4 py-2 rounded shadow flex items-center gap-2">
+                        <i class="fa-solid fa-clock"></i> Pending Queue (12)
+                    </button>
+                    <button class="bg-transparent text-slate-400 hover:text-white font-bold text-xs px-4 py-2 rounded transition flex items-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> Approved Logs
+                    </button>
+                    <button class="bg-transparent text-slate-400 hover:text-white font-bold text-xs px-4 py-2 rounded transition flex items-center gap-2">
+                        <i class="fa-solid fa-ban"></i> Rejected
+                    </button>
+                </div>
+                <button class="text-xs bg-slate-800 text-slate-300 font-bold px-3 py-1.5 rounded border border-slate-600 hover:bg-slate-700 transition"><i class="fa-solid fa-file-csv mr-1"></i> Export Pending CSV</button>
+            </div>
+
+            <!-- Pending Approvals Ledger -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-black text-slate-400 uppercase tracking-widest text-[10px] border-b border-slate-800">
+                            <th class="p-4">Tx ID & Date</th>
+                            <th class="p-4">Publisher Target</th>
+                            <th class="p-4 text-center">Amount</th>
+                            <th class="p-4">Method & Account</th>
+                            <th class="p-4 text-center">Fraud Score</th>
+                            <th class="p-4 text-right">Clearance</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-slate-800 font-mono text-xs">
+                        
+                        <!-- Withdrawal Entry 1 -->
+                        <tr class="hover:bg-slate-900/50 transition-colors">
+                            <td class="p-4">
+                                <div class="font-bold text-white text-[10px]">#TX-A9B8C7D6</div>
+                                <div class="text-slate-500 mt-1">14 Jun 26, 08:30</div>
+                            </td>
+                            <td class="p-4">
+                                <a href="/admin/user/usr_1" class="font-sans font-bold text-blue-400 hover:underline">dev_master@gmail.com</a>
+                                <div class="text-[10px] text-slate-500 mt-1">Balance remaining: $0.40</div>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="bg-green-900/30 text-green-400 border border-green-800 px-3 py-1 rounded font-bold text-sm">$ 45.00</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="font-sans font-bold text-white flex items-center gap-2"><i class="fa-brands fa-bitcoin text-orange-500"></i> USDT TRC20</div>
+                                <div class="text-orange-300 mt-1">TXZ89P...KLM92A</div>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="text-green-500 font-bold bg-green-950/50 px-2 py-0.5 rounded border border-green-900">0% Clean</span>
+                            </td>
+                            <td class="p-4 text-right space-x-2">
+                                <button onclick="openTxModal('TX-A9B8C7D6', 'approve')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded font-sans font-bold transition text-xs shadow">Approve</button>
+                                <button onclick="openTxModal('TX-A9B8C7D6', 'reject')" class="bg-red-900 hover:bg-red-800 border border-red-700 text-red-100 px-3 py-1.5 rounded font-sans font-bold transition text-xs">Reject</button>
+                            </td>
+                        </tr>
+
+                        <!-- Withdrawal Entry 2 -->
+                        <tr class="hover:bg-slate-900/50 transition-colors bg-red-950/10">
+                            <td class="p-4">
+                                <div class="font-bold text-white text-[10px]">#TX-X1Y2Z3W4</div>
+                                <div class="text-slate-500 mt-1">13 Jun 26, 23:15</div>
+                            </td>
+                            <td class="p-4">
+                                <a href="/admin/user/usr_2" class="font-sans font-bold text-blue-400 hover:underline">shadow_link@xyz.com</a>
+                                <div class="text-[10px] text-slate-500 mt-1">Balance remaining: $0.00</div>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="bg-green-900/30 text-green-400 border border-green-800 px-3 py-1 rounded font-bold text-sm">$ 12.00</span>
+                            </td>
+                            <td class="p-4">
+                                <div class="font-sans font-bold text-white flex items-center gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-3 grayscale opacity-70"> PayPal</div>
+                                <div class="text-blue-300 mt-1">shadow@xyz.com</div>
+                            </td>
+                            <td class="p-4 text-center">
+                                <span class="text-red-500 font-bold bg-red-950/50 px-2 py-0.5 rounded border border-red-900"><i class="fa-solid fa-triangle-exclamation"></i> 85% Suspicious</span>
+                            </td>
+                            <td class="p-4 text-right space-x-2">
+                                <button onclick="openTxModal('TX-X1Y2Z3W4', 'approve')" class="bg-green-900 hover:bg-green-800 border border-green-700 text-green-100 px-3 py-1.5 rounded font-sans font-bold transition text-xs">Approve</button>
+                                <button onclick="openTxModal('TX-X1Y2Z3W4', 'reject')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded font-sans font-bold transition text-xs shadow">Reject</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= TRANSACTION ACTION MODAL ================= -->
+<div id="txActionModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex-col items-center justify-center z-[100] px-4 font-sans">
+    <div class="bg-monet-card border border-slate-700 rounded-xl w-full max-w-md shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="txActionModalBox">
+        <div id="modalHeader" class="p-5 border-b border-slate-800 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white" id="modalTitle">Process Transaction</h3>
+            <button onclick="closeTxModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form class="p-5 space-y-4">
+            <input type="hidden" id="actionType">
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Transaction ID</label>
+                <input type="text" id="txIdDisplay" readonly class="w-full bg-black border border-slate-800 text-slate-400 text-sm rounded px-3 py-2 font-mono outline-none">
+            </div>
+            
+            <!-- Conditional Fields via JS -->
+            <div id="approveFields" class="hidden space-y-4">
+                <div class="bg-green-950/20 border border-green-900 p-3 rounded text-green-400 text-xs leading-relaxed">
+                    You are marking this payout as completed. Enter the network Transaction Hash / Payment Receipt ID below so the user can verify it.
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Receipt Hash / Trx ID</label>
+                    <input type="text" placeholder="e.g. e3b0c44298fc1c149afbf4c8996fb..." class="w-full bg-black border border-slate-700 text-white text-sm rounded px-3 py-2 focus:border-green-500 focus:outline-none font-mono">
+                </div>
+            </div>
+
+            <div id="rejectFields" class="hidden space-y-4">
+                <div class="bg-red-950/20 border border-red-900 p-3 rounded text-red-400 text-xs leading-relaxed">
+                    You are rejecting this payout. Select whether to return funds to their wallet or confiscate them due to fraud.
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Rejection Handling</label>
+                    <select class="w-full bg-black border border-slate-700 text-white text-sm rounded px-3 py-2 focus:border-red-500 focus:outline-none mb-3">
+                        <option>Refund to Wallet (Invalid address etc.)</option>
+                        <option>Confiscate Funds (Fraud/TOS Violation)</option>
+                    </select>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Admin Notes provided to user</label>
+                    <textarea rows="2" placeholder="Explain the rejection reason..." class="w-full bg-black border border-slate-700 text-white text-sm rounded px-3 py-2 focus:border-red-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+
+            <div class="pt-4 flex justify-end gap-2 border-t border-slate-800">
+                <button type="button" onclick="closeTxModal()" class="px-4 py-2 bg-slate-800 text-white rounded text-sm hover:bg-slate-700 font-bold transition">Cancel</button>
+                <button type="submit" id="submitBtn" class="px-4 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 font-bold transition shadow-lg">Confirm Processing</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openTxModal(txId, action) {
+        document.getElementById('txIdDisplay').value = txId;
+        const modal = document.getElementById('txActionModal');
+        const box = document.getElementById('txActionModalBox');
+        const header = document.getElementById('modalHeader');
+        const title = document.getElementById('modalTitle');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Reset Logic
+        document.getElementById('approveFields').classList.add('hidden');
+        document.getElementById('rejectFields').classList.add('hidden');
+        header.className = 'p-5 border-b border-slate-800 flex justify-between items-center';
+
+        if(action === 'approve') {
+            title.innerText = 'Approve Transaction';
+            header.classList.add('bg-green-950/30');
+            submitBtn.className = 'px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-sm font-bold transition shadow-lg shadow-green-500/20';
+            submitBtn.innerText = 'Approve & Save Hash';
+            document.getElementById('approveFields').classList.remove('hidden');
+        } else {
+            title.innerText = 'Reject Transaction';
+            header.classList.add('bg-red-950/30');
+            submitBtn.className = 'px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded text-sm font-bold transition shadow-lg shadow-red-500/20';
+            submitBtn.innerText = 'Confirm Rejection';
+            document.getElementById('rejectFields').classList.remove('hidden');
+        }
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        void modal.offsetWidth; // Trigger Animation Reflow
+        box.classList.remove('scale-95', 'opacity-0');
+        box.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closeTxModal() {
+        const modal = document.getElementById('txActionModal');
+        const box = document.getElementById('txActionModalBox');
+        
+        box.classList.remove('scale-100', 'opacity-100');
+        box.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }, 300);
+    }
+</script>
+{% endblock %}

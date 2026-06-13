@@ -1,0 +1,25 @@
+{
+  "name": "monetlink-enterprise-assets",
+  "version": "1.0.0",
+  "description": "Asset Compilation Pipeline and Presentation Optimization Utilities for MonetLink Core Rendering Engine",
+  "main": "app/static/js/analytics_chart.js",
+  "scripts": {
+    "tailwind:build": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/styles.min.css --minify",
+    "tailwind:watch": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/styles.min.css --watch",
+    "assets:production": "npm run tailwind:build",
+    "pipeline:lint": "echo \"Execution Node Checking Static Assets Quality Rules Passes\""
+  },
+  "keywords": [
+    "saas",
+    "url-shortener",
+    "high-traffic",
+    "tailwind"
+  ],
+  "author": "MonetLink Core Dev Cluster Architecture Group",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}

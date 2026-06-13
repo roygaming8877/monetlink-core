@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Payment Proofs | MonetLink{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-black text-white mb-4">Payment Proofs</h1>
+        <p class="text-slate-400">We process payments daily. Minimum withdrawal is only $5.00.</p>
+    </div>
+
+    <div class="bg-monet-card rounded-2xl border border-purple-900/50 shadow-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm border-collapse">
+                <thead>
+                    <tr class="bg-monet-purple text-slate-300 uppercase tracking-widest text-xs border-b border-purple-800">
+                        <th class="p-4">Date</th>
+                        <th class="p-4">User</th>
+                        <th class="p-4 text-right">Amount</th>
+                        <th class="p-4">Method</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-300 divide-y divide-purple-900/40 font-mono">
+                    <!-- Dummy data representing Jinja2 iteration loop -->
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-slate-400">14-Jun-2026 02:45 AM</td>
+                        <td class="p-4">pub***@gmail.com</td>
+                        <td class="p-4 text-right text-green-400 font-bold">$ 25.50</td>
+                        <td class="p-4 flex items-center gap-2"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4" alt="PayPal"> PayPal</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-slate-400">14-Jun-2026 01:20 AM</td>
+                        <td class="p-4">vik***@yahoo.com</td>
+                        <td class="p-4 text-right text-green-400 font-bold">$ 12.00</td>
+                        <td class="p-4 flex items-center gap-2"><i class="fa-brands fa-btc text-orange-400 text-lg"></i> Bitcoin</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 text-slate-400">13-Jun-2026 11:15 PM</td>
+                        <td class="p-4">raj***@outlook.com</td>
+                        <td class="p-4 text-right text-green-400 font-bold">$ 8.50</td>
+                        <td class="p-4 flex items-center gap-2"><i class="fa-solid fa-mobile-screen text-blue-400"></i> UPI (India)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination Component -->
+        <div class="bg-monet-purple/30 p-4 border-t border-purple-800 flex justify-center">
+            <nav class="flex gap-2">
+                <button class="px-4 py-2 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition">Previous</button>
+                <button class="px-4 py-2 bg-monet-accent text-monet-dark font-bold rounded">1</button>
+                <button class="px-4 py-2 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition">2</button>
+                <button class="px-4 py-2 bg-monet-dark text-slate-400 rounded hover:bg-purple-800 transition">Next</button>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
